@@ -95,7 +95,7 @@ return Boolean.FALSE;
 ### $\color{#FF0000}{1.幂等控制}$ 
 既然是重试，就要保证这个代码执行多遍不会有问题。比如，插入数据的操作，不要插入多条。
 
-### $\color{#FF0000}{2.♣线程阻塞}$
+### $\color{#FF0000}{2.线程阻塞}$
 spring-retry源码如下：
 ```java
 public void backOff(BackOffContext backOffContext) throws BackOffInterruptedException {
