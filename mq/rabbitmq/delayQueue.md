@@ -5,12 +5,13 @@
 
 ## 二：实现步骤
 ### 1.插件安装
-去RabbitMQ的官网下载插件，插件地址：https://www.rabbitmq.com/community-plugins.html
-直接搜索rabbitmq_delayed_message_exchange即可找到我们需要下载的插件，下载和RabbitMQ配套的版本；
-将插件文件复制到RabbitMQ安装目录的plugins目录下；
-进入RabbitMQ安装目录的sbin目录下，使用如下命令启用延迟插件；
-rabbitmq-plugins enable rabbitmq_delayed_message_exchange
-启用插件成功后就可以看到如下信息，之后重新启动RabbitMQ服务即可。
+* 去RabbitMQ的官网下载插件，插件地址：https://www.rabbitmq.com/community-plugins.html
+* 直接搜索rabbitmq_delayed_message_exchange即可找到我们需要下载的插件，下载和RabbitMQ配套的版本；
+* 将插件文件复制到RabbitMQ安装目录的plugins目录下；
+* 进入RabbitMQ安装目录的sbin目录下，使用如下命令启用延迟插件；
+* rabbitmq-plugins enable rabbitmq_delayed_message_exchange
+* 启用插件成功后就可以看到如下信息，之后重新启动RabbitMQ服务即可。  
+
 一切完成之后，可以去rabbitMQ控制台尝试新增一个交换机，可以看到交换机类型多了一个x-delayed-message，这是实现延迟消费的关键。
 
 
@@ -201,9 +202,9 @@ public class TransDelayConsumer {
 
 
 ## 四：总结
-死信队列与延迟插件比较
-死信队列：如果消息发送到死信队列并超过了设置的存活时间，就会被转发到设置好的处理超时消息的队列当中去，利用该特性可以实现延迟消息。这种实现方式需要两个队列，比较麻烦。另外，当各个消息的延迟时间不同时，先发送的消息会阻塞后面的消息。
+死信队列与延迟插件比较  
+* 死信队列：如果消息发送到死信队列并超过了设置的存活时间，就会被转发到设置好的处理超时消息的队列当中去，利用该特性可以实现延迟消息。这种实现方式需要两个队列，比较麻烦。另外，当各个消息的延迟时间不同时，先发送的消息会阻塞后面的消息。
 
-延迟插件：通过安装插件自定义交换机，让交换机拥有延迟发送消息的能力，从而实现延迟消息。一个交换机，一个队列即可实现。可以任意设置消息的延迟时间，会按照设定的时间进行消费。
+* 延迟插件：通过安装插件自定义交换机，让交换机拥有延迟发送消息的能力，从而实现延迟消息。一个交换机，一个队列即可实现。可以任意设置消息的延迟时间，会按照设定的时间进行消费。
 
 目前我们系统已经安装了插件，需要时推荐使用延迟插件实现延迟消费。
