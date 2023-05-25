@@ -92,7 +92,7 @@ rabbitTemplate.convertAndSend(exchangeDelayName
                                }
                            });
 
-jafa
+```
 发送消息时，指定延迟时间即可。
 
 ## 5.消费消息
