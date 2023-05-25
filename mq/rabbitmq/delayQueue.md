@@ -4,7 +4,7 @@
 因业务需求，trans需要实现延迟消费。当时，个人想到的是利用RabbitMQ的死信队列来实现，同事提醒可以用插件来实现更加简单。一番研究后，发现利用插件实现延时队列确实更简洁方便，在此做个记录。
 
 ## 二：实现步骤
-### 插件安装
+### 1.插件安装
 去RabbitMQ的官网下载插件，插件地址：https://www.rabbitmq.com/community-plugins.html
 直接搜索rabbitmq_delayed_message_exchange即可找到我们需要下载的插件，下载和RabbitMQ配套的版本；
 将插件文件复制到RabbitMQ安装目录的plugins目录下；
@@ -21,13 +21,13 @@ rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
 
 
-### 添加依赖和配置
+### 2.添加依赖和配置
 在pom.xml文件中添加AMQP相关依赖，在application.yml添加RabbitMQ的相关配置；
 
 引入方式很简单，这部分不再赘述。
 
 
-### 创建RabbitMQ的Java配置
+### 3.创建RabbitMQ的Java配置
 ```java
 @Configuration
 public class RabbitConfig {
@@ -77,7 +77,7 @@ public class RabbitConfig {
 
 备注说明：这里的关键是创建的交换机类型是x-delayed-message，可以发送延迟消息。
 
-生产消息
+## 4.生产消息
 ```java
 rabbitTemplate.convertAndSend(exchangeDelayName
                            , RabbitConfig.QUEUEDELAYROUTEKEY
@@ -94,7 +94,7 @@ rabbitTemplate.convertAndSend(exchangeDelayName
 jafa
 发送消息时，指定延迟时间即可。
 
-消费消息
+## 5.消费消息
 ```java
 @Slf4j
 @Component
