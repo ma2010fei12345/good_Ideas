@@ -1,3 +1,3 @@
 # 中台签约时许图
 
-![image](../img/signflow_zhongtai.png)
+![image](../img/signFlow_zhongtai.png)
